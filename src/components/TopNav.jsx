@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from 'src/assets/R.png';
+import logo from 'public/R.png';
 
 const navItems = [
   { key: 'home', label: 'Home' },
@@ -20,8 +20,7 @@ const TopNav = ({ currentPage, setPage }) => {
           onClick={() => setPage('home')}
           className="border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-white transition hover:border-white/20 hover:bg-white/10"
         >
-          Defending 
-          Democracy
+          Defending Democracy
         </button>
 
         <nav className="hidden grow items-center justify-center gap-4 text-sm font-medium text-gray-300 md:flex">
