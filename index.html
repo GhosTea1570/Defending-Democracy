@@ -8,25 +8,760 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            margin: 0;
             font-family: 'Inter', Arial, Helvetica, sans-serif;
             background-color: #000;
             color: rgba(255, 255, 255, 0.87);
+            line-height: 1.5;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 1rem 1.5rem;
+        }
+
+        .header-container {
+            max-width: 80rem;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .header-button {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .header-button:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: none;
+            gap: 1rem;
+            flex: 1;
+            justify-content: center;
+            font-size: 0.875rem;
+        }
+
+        nav.visible {
+            display: flex;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: #d1d5db;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        nav button:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        nav button.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            height: 3rem;
+            width: 3rem;
+            object-fit: contain;
+        }
+
+        .mobile-select {
+            display: block;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #000;
+            color: white;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                display: flex !important;
+            }
+            .mobile-select {
+                display: none;
+            }
+        }
+
+        main {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        .space-y-8 {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        section {
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(24, 23, 23, 0.5);
+            padding: 2rem;
+        }
+
+        section h1 {
+            font-size: 2.25rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: white;
+            margin-top: 0.75rem;
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        section p {
+            color: #d1d5db;
+        }
+
+        .section-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            color: #ef4444;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            line-height: 1.75;
+            color: #e5e7eb;
+            max-width: 42rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .hero-section {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-section {
+                grid-template-columns: 1.2fr 0.8fr;
+                align-items: center;
+            }
+        }
+
+        .hero-title {
+            font-size: 2.25rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 3.75rem;
+            }
+        }
+
+        .hero-text {
+            font-size: 1.125rem;
+            color: #e5e7eb;
+            max-width: 28rem;
+            font-weight: 500;
+            line-height: 1.75;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-buttons {
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: space-between;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #d10024;
+            color: white;
+            font-weight: 700;
+            padding: 0.75rem 2.5rem;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background-color: #b80020;
+        }
+
+        .hero-image {
+            position: relative;
+            height: 20rem;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-image img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .carousel-button {
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: white;
+        }
+
+        .carousel-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .carousel-indicators {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            height: 3px;
+            background-color: rgba(255, 255, 255, 0.2);
+            flex: 1;
+        }
+
+        .indicator {
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .indicator.active {
+            background-color: white;
+        }
+
+        .carousel-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #d1d5db;
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .form-section {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .form-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .form-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .form-inputs {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #d1d5db;
+        }
+
+        .form-group label {
+            margin-bottom: 0.25rem;
+        }
+
+        .form-group select {
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #000;
+            color: white;
+            padding: 0.5rem 0.75rem;
+            outline: none;
+        }
+
+        .map-section {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 1024px) {
+            .map-section {
+                grid-template-columns: 1.2fr 0.8fr;
+            }
+        }
+
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: transparent;
+            padding: 1rem;
+        }
+
+        .map-image {
+            position: relative;
+            height: 20rem;
+            overflow: hidden;
+            border-radius: 1.2rem;
+            background-color: transparent;
+        }
+
+        .map-image img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        .events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .event-card {
+            border-radius: 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+        }
+
+        .event-card-label {
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        .event-card-title {
+            margin-top: 0.25rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .event-card-details {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #d1d5db;
+        }
+
+        .no-events {
+            border-radius: 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: #d1d5db;
+        }
+
+        .card {
+            border-radius: 1.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+        }
+
+        .card h3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #d1d5db;
+        }
+
+        .card-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            color: #ef4444;
+            margin-bottom: 0.75rem;
+        }
+
+        .badge {
+            display: inline-block;
+            border-radius: 9999px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            background-color: rgba(239, 68, 68, 0.1);
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #fca5a5;
+        }
+
+        .map-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .map-header-text h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.25rem;
+        }
+
+        .map-header-text p {
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        .country-select {
+            margin-top: 0.75rem;
+        }
+
+        .country-select select {
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #000;
+            color: white;
+            padding: 0.5rem 0.75rem;
+            outline: none;
+            width: 100%;
         }
     </style>
 </head>
-<body class="bg-black text-white">
-    <div id="app"></div>
+<body>
+    <header>
+        <div class="header-container">
+            <button class="header-button" onclick="setPage('home')">Defending Democracy</button>
+            <nav id="desktop-nav">
+                <button onclick="setPageNav('home')" class="nav-link active">Home</button>
+                <button onclick="setPageNav('about')" class="nav-link">About DD</button>
+                <button onclick="setPageNav('projects')" class="nav-link">Projects</button>
+                <button onclick="setPageNav('issues')" class="nav-link">Issues</button>
+                <button onclick="setPageNav('testimonies')" class="nav-link">Testimonies</button>
+                <button onclick="setPageNav('students')" class="nav-link">For Students</button>
+                <button onclick="setPageNav('educate')" class="nav-link">Educate</button>
+            </nav>
+            <div class="header-right">
+                <img src="./favicon.png" alt="Logo" class="logo">
+                <select class="mobile-select" onchange="setPage(this.value)">
+                    <option value="home">Home</option>
+                    <option value="about">About DD</option>
+                    <option value="projects">Projects</option>
+                    <option value="issues">Issues</option>
+                    <option value="testimonies">Testimonies</option>
+                    <option value="students">For Students</option>
+                    <option value="educate">Educate</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="home" class="page-section active space-y-8">
+            <section class="hero-section">
+                <div class="space-y-8" style="gap: 1.5rem;">
+                    <h1 class="hero-title">The world needs you.</h1>
+                    <div class="hero-buttons">
+                        <p class="hero-text">Youth across the globe are finding their voices. At Defending Democracy, we amplify those voices for the whole world to hear.</p>
+                        <button class="btn" onclick="setPage('about')">About DD</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img id="hero-image" src="./images/hero-1.png" alt="Hero background">
+                    <div class="hero-image-overlay"></div>
+                </div>
+            </section>
+
+            <div>
+                <div class="carousel-controls">
+                    <button class="carousel-button" onclick="showPrevious()">&#8249;</button>
+                    <div class="carousel-indicators">
+                        <div class="indicator active" id="ind-0"></div>
+                        <div class="indicator" id="ind-1"></div>
+                        <div class="indicator" id="ind-2"></div>
+                        <div class="indicator" id="ind-3"></div>
+                        <div class="indicator" id="ind-4"></div>
+                    </div>
+                    <button class="carousel-button" onclick="showNext()">&#8250;</button>
+                </div>
+                <div class="carousel-info">
+                    <span id="carousel-counter">1 / 5</span>
+                    <span>Swipe through the story</span>
+                </div>
+            </div>
+
+            <section class="form-section">
+                <p class="form-title">I am interested in</p>
+                <div class="form-inputs">
+                    <div class="form-group">
+                        <label>Activity</label>
+                        <select onchange="activity = this.value; updateEvents()">
+                            <option value="">Choose activity</option>
+                            <option value="Protest">Protest</option>
+                            <option value="Volunteer">Volunteer</option>
+                            <option value="Cleanup">Cleanup</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Purpose</label>
+                        <select onchange="purpose = this.value; updateEvents()">
+                            <option value="">Choose purpose</option>
+                            <option value="Environmental">Environmental</option>
+                            <option value="Voting">Voting</option>
+                            <option value="Womans Rights">Womans Rights</option>
+                            <option value="Gender Equality">Gender Equality</option>
+                            <option value="Racial Equality">Racial Equality</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <select onchange="handleLocationChange(this.value)">
+                            <option value="">Choose location</option>
+                            <option value="5' miles">5' miles</option>
+                            <option value="10' miles">10' miles</option>
+                            <option value="15' miles">15' miles</option>
+                            <option value="Select city">Select city</option>
+                            <option value="Select state">Select state</option>
+                            <option value="Select country">Select country</option>
+                        </select>
+                        <div id="country-select-container" class="country-select" style="display: none;">
+                            <select onchange="handleCountrySelect(this.value)">
+                                <option value="">Choose a country</option>
+                                <option value="United States">United States</option>
+                                <option>Afghanistan</option><option>Albania</option><option>Algeria</option><option>Andorra</option><option>Angola</option><option>Antigua and Barbuda</option><option>Argentina</option><option>Armenia</option><option>Australia</option><option>Austria</option><option>Azerbaijan</option><option>Bahamas</option><option>Bahrain</option><option>Bangladesh</option><option>Barbados</option><option>Belarus</option><option>Belgium</option><option>Belize</option><option>Benin</option><option>Bhutan</option><option>Bolivia</option><option>Bosnia and Herzegovina</option><option>Botswana</option><option>Brazil</option><option>Brunei</option><option>Bulgaria</option><option>Burkina Faso</option><option>Burundi</option><option>Cabo Verde</option><option>Cambodia</option><option>Cameroon</option><option>Canada</option><option>Central African Republic</option><option>Chad</option><option>Chile</option><option>China</option><option>Colombia</option><option>Comoros</option><option>Congo</option><option>Costa Rica</option><option>Côte d'Ivoire</option><option>Croatia</option><option>Cuba</option><option>Cyprus</option><option>Czechia</option><option>Democratic Republic of the Congo</option><option>Denmark</option><option>Djibouti</option><option>Dominica</option><option>Dominican Republic</option><option>Ecuador</option><option>Egypt</option><option>El Salvador</option><option>Equatorial Guinea</option><option>Eritrea</option><option>Estonia</option><option>Eswatini</option><option>Ethiopia</option><option>Fiji</option><option>Finland</option><option>France</option><option>Gabon</option><option>Gambia</option><option>Georgia</option><option>Germany</option><option>Ghana</option><option>Greece</option><option>Grenada</option><option>Guatemala</option><option>Guinea</option><option>Guinea-Bissau</option><option>Guyana</option><option>Haiti</option><option>Honduras</option><option>Hungary</option><option>Iceland</option><option>India</option><option>Indonesia</option><option>Iran</option><option>Iraq</option><option>Ireland</option><option>Israel</option><option>Italy</option><option>Jamaica</option><option>Japan</option><option>Jordan</option><option>Kazakhstan</option><option>Kenya</option><option>Kiribati</option><option>Kuwait</option><option>Kyrgyzstan</option><option>Laos</option><option>Latvia</option><option>Lebanon</option><option>Lesotho</option><option>Liberia</option><option>Libya</option><option>Liechtenstein</option><option>Lithuania</option><option>Luxembourg</option><option>Madagascar</option><option>Malawi</option><option>Malaysia</option><option>Maldives</option><option>Mali</option><option>Malta</option><option>Marshall Islands</option><option>Mauritania</option><option>Mauritius</option><option>Mexico</option><option>Micronesia</option><option>Moldova</option><option>Monaco</option><option>Mongolia</option><option>Montenegro</option><option>Morocco</option><option>Mozambique</option><option>Myanmar</option><option>Namibia</option><option>Nauru</option><option>Nepal</option><option>Netherlands</option><option>New Zealand</option><option>Nicaragua</option><option>Niger</option><option>Nigeria</option><option>North Korea</option><option>North Macedonia</option><option>Norway</option><option>Oman</option><option>Pakistan</option><option>Palau</option><option>Panama</option><option>Papua New Guinea</option><option>Paraguay</option><option>Peru</option><option>Philippines</option><option>Poland</option><option>Portugal</option><option>Qatar</option><option>Romania</option><option>Russia</option><option>Rwanda</option><option>Saint Kitts and Nevis</option><option>Saint Lucia</option><option>Saint Vincent and the Grenadines</option><option>Samoa</option><option>San Marino</option><option>Sao Tome and Principe</option><option>Saudi Arabia</option><option>Senegal</option><option>Serbia</option><option>Seychelles</option><option>Sierra Leone</option><option>Singapore</option><option>Slovakia</option><option>Slovenia</option><option>Solomon Islands</option><option>Somalia</option><option>South Africa</option><option>South Korea</option><option>South Sudan</option><option>Spain</option><option>Sri Lanka</option><option>Sudan</option><option>Suriname</option><option>Sweden</option><option>Switzerland</option><option>Syria</option><option>Tajikistan</option><option>Tanzania</option><option>Thailand</option><option>Timor-Leste</option><option>Togo</option><option>Tonga</option><option>Trinidad and Tobago</option><option>Tunisia</option><option>Turkey</option><option>Turkmenistan</option><option>Tuvalu</option><option>Uganda</option><option>Ukraine</option><option>United Arab Emirates</option><option>United Kingdom</option><option>Uruguay</option><option>Uzbekistan</option><option>Vanuatu</option><option>Vatican City</option><option>Venezuela</option><option>Vietnam</option><option>Yemen</option><option>Zambia</option><option>Zimbabwe</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="map-header">
+                    <div class="map-header-text">
+                        <h2>Find nearby opportunities</h2>
+                        <p>Hover over highlighted areas to explore local events.</p>
+                    </div>
+                    <span class="badge">Live map preview</span>
+                </div>
+                <div class="map-section">
+                    <div class="map-container">
+                        <div class="map-image">
+                            <img id="map-image" src="./images/global-map.png" alt="Global map">
+                        </div>
+                    </div>
+                    <div class="events-list" id="events-container">
+                        <div class="no-events">No events match those selections yet. Try changing the dropdowns to update the list.</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="about" class="page-section space-y-8">
+            <section>
+                <p class="section-label">About Defending Democracy</p>
+                <h1>A movement for youth-led civic action</h1>
+                <p class="section-description" style="margin-top: 1rem;">Defending Democracy connects young people with projects that protect rights, strengthen communities, and build a healthier future. Using this platform, we make civic engagement easy to explore, understand, and join.</p>
+                <div class="grid-2" style="margin-top: 1.5rem;">
+                    <div class="card"><h3>Who we are</h3><p>A network of young volunteers, organizers, and educators who believe every voice matters. We support local and international efforts that fight for equity and strengthen democracy.</p></div>
+                    <div class="card"><h3>What we do</h3><p>We bring together causes, stories, and learning resources so students and young people can discover opportunities by issue, by region, and by impact.</p></div>
+                </div>
+            </section>
+            <div class="grid-3">
+                <div class="card"><h3>Our mission</h3><p>Build an easy way for youth to find civic projects, support democratic values, and take action on issues that matter.</p></div>
+                <div class="card"><h3>Why it matters</h3><p>Democracy works when more people participate. We help young leaders turn awareness into action and connection into real change.</p></div>
+                <div class="card"><h3>How to join</h3><p>Explore activities, choose an issue, and connect to projects or resources that match your interests and experience level.</p></div>
+            </div>
+        </div>
+
+        <div id="projects" class="page-section space-y-8">
+            <section>
+                <p class="section-label">Projects</p>
+                <h1>Explore community-led action</h1>
+                <p class="section-description" style="margin-top: 1rem;">Browse featured projects. Each program is designed to be accessible, impactful, and connected to the issues young people care about most.</p>
+            </section>
+            <div class="grid-2">
+                <div class="card"><p class="card-label">Voting</p><h3>Youth Voter Mobilization</h3><p>A campaign to register students and bring voter education to campuses.</p></div>
+                <div class="card"><p class="card-label">Environmental</p><h3>Community Clean-Up</h3><p>Volunteer crews restore parks, collect waste, and advocate for cleaner public spaces.</p></div>
+                <div class="card"><p class="card-label">Gender Equality</p><h3>Equality Dialogue Series</h3><p>Virtual roundtables connecting youth leaders across borders to discuss equity and justice.</p></div>
+                <div class="card"><p class="card-label">Civil Rights</p><h3>Rights Awareness Workshop</h3><p>Practical sessions on voting rights, protest safety, and digital civic participation.</p></div>
+            </div>
+        </div>
+
+        <div id="issues" class="page-section space-y-8">
+            <section>
+                <p class="section-label">Issues</p>
+                <h1>The topics we focus on</h1>
+                <p class="section-description" style="margin-top: 1rem;">These issue areas guide the work we feature. Each one is a space where youth can take concrete action and lead local change.</p>
+            </section>
+            <div class="grid-3">
+                <div class="card"><h3>Environmentalism</h3><p>Protect land, clean streets, and promote sustainable civic projects.</p></div>
+                <div class="card"><h3>Voting</h3><p>Mobilize young people, host voter education drives, and strengthen turnout.</p></div>
+                <div class="card"><h3>Gender Equality</h3><p>Support inclusive leadership and equal opportunity for all genders.</p></div>
+                <div class="card"><h3>Racial Equality</h3><p>Build solidarity, confront bias, and invest in equitable policy change.</p></div>
+                <div class="card"><h3>Civil Rights</h3><p>Defend free expression, protest rights, and access to fair representation.</p></div>
+                <div class="card"><h3>Education</h3><p>Create resources that teach civic engagement and democratic values.</p></div>
+            </div>
+        </div>
+
+        <div id="testimonies" class="page-section space-y-8">
+            <section>
+                <p class="section-label">Testimonies</p>
+                <h1>Voices from the movement</h1>
+                <p class="section-description" style="margin-top: 1rem;">Real students and organizers share what working for democracy feels like, and how youth-led action is changing communities.</p>
+            </section>
+            <div class="grid-3">
+                <div class="card"><p>"Joining the local clean-up helped me meet other activists and take real steps toward civic change."</p><p class="card-label" style="margin-top: 1rem;">Youth Organizer</p><p style="font-weight: 600; color: #d1d5db;">Maya</p></div>
+                <div class="card"><p>"I learned how to turn my passion for voting rights into an action plan in my community."</p><p class="card-label" style="margin-top: 1rem;">Student Leader</p><p style="font-weight: 600; color: #d1d5db;">Tariq</p></div>
+                <div class="card"><p>"Defending Democracy made it easier to find meaningful events and resources that matched my values."</p><p class="card-label" style="margin-top: 1rem;">Volunteer</p><p style="font-weight: 600; color: #d1d5db;">Ana</p></div>
+            </div>
+        </div>
+
+        <div id="students" class="page-section space-y-8">
+            <section>
+                <p class="section-label">For students</p>
+                <h1>Opportunities for every level</h1>
+                <p class="section-description" style="margin-top: 1rem;">Whether you are in high school, college, or a community group, discover programs that fit your schedule, interests, and goals.</p>
+            </section>
+            <div class="grid-3">
+                <div class="card"><h3>DD Database</h3><p>A searchable guide to student-centered programs and civic resources.</p></div>
+                <div class="card"><h3>Teaching Resources</h3><p>Lesson plans, toolkits, and tips for educators and campus organizers.</p></div>
+                <div class="card"><h3>Student Stories</h3><p>Profiles of youth leaders who used civic action to create change.</p></div>
+            </div>
+        </div>
+
+        <div id="educate" class="page-section space-y-8">
+            <section>
+                <p class="section-label">Educate</p>
+                <h1>Learn more, take action</h1>
+                <p class="section-description" style="margin-top: 1rem;">A place for teaching resources, toolkits, and deeper context on the issues that shape youth civic engagement around the world.</p>
+            </section>
+            <div class="grid-3">
+                <div class="card"><p class="card-label">DD Database</p><h3>Civic Learning</h3><p>Search guides, reports, and classroom-ready content for youth civic engagement.</p></div>
+                <div class="card"><p class="card-label">Embedded lessons</p><h3>Teaching materials</h3><p>Resources for educators who want to bring democracy, protest, and rights into the classroom.</p></div>
+                <div class="card"><p class="card-label">Research & tools</p><h3>Topic exploration</h3><p>Dive deeper into each issue with curated readings, videos, and downloadable guides.</p></div>
+            </div>
+        </div>
+    </main>
 
     <script>
-        // State management
-        let currentPage = 'home';
         let currentImage = 0;
         let activity = '';
         let purpose = '';
@@ -34,476 +769,84 @@
         let selectedCountry = '';
         let mapView = 'global';
 
-        const images = [
-            './images/hero-1.png',
-            './images/hero-2.png',
-            './images/hero-3.png',
-            './images/hero-4.png',
-            './images/hero-5.png',
-        ];
-
-        const unCountries = [
-            'Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Argentina','Armenia','Australia','Austria','Azerbaijan','Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bhutan','Bolivia','Bosnia and Herzegovina','Botswana','Brazil','Brunei','Bulgaria','Burkina Faso','Burundi','Cabo Verde','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo','Costa Rica','Côte d\'Ivoire','Croatia','Cuba','Cyprus','Czechia','Democratic Republic of the Congo','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eritrea','Estonia','Eswatini','Ethiopia','Fiji','Finland','France','Gabon','Gambia','Georgia','Germany','Ghana','Greece','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kazakhstan','Kenya','Kiribati','Kuwait','Kyrgyzstan','Laos','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania','Luxembourg','Madagascar','Malawi','Malaysia','Maldives','Mali','Malta','Marshall Islands','Mauritania','Mauritius','Mexico','Micronesia','Moldova','Monaco','Mongolia','Montenegro','Morocco','Mozambique','Myanmar','Namibia','Nauru','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','North Macedonia','Norway','Oman','Pakistan','Palau','Panama','Papua New Guinea','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Russia','Rwanda','Saint Kitts and Nevis','Saint Lucia','Saint Vincent and the Grenadines','Samoa','San Marino','Sao Tome and Principe','Saudi Arabia','Senegal','Serbia','Seychelles','Sierra Leone','Singapore','Slovakia','Slovenia','Solomon Islands','Somalia','South Africa','South Korea','South Sudan','Spain','Sri Lanka','Sudan','Suriname','Sweden','Switzerland','Syria','Tajikistan','Tanzania','Thailand','Timor-Leste','Togo','Tonga','Trinidad and Tobago','Tunisia','Turkey','Turkmenistan','Tuvalu','Uganda','Ukraine','United Arab Emirates','United Kingdom','United States','Uruguay','Uzbekistan','Vanuatu','Vatican City','Venezuela','Vietnam','Yemen','Zambia','Zimbabwe'
-        ];
+        const heroImages = ['./images/hero-1.png', './images/hero-2.png', './images/hero-3.png', './images/hero-4.png', './images/hero-5.png'];
 
         const events = [
-            {
-                title: 'Downtown cleanup drive',
-                activity: 'Volunteer',
-                purpose: 'Environmental',
-                location: "5' miles",
-                details: 'Volunteer • Environmental • 5 miles',
-            },
-            {
-                title: 'Community voting rally',
-                activity: 'Protest',
-                purpose: 'Voting',
-                location: "10' miles",
-                details: 'Protest • Voting • 10 miles',
-            },
-            {
-                title: 'Regional justice summit',
-                activity: 'Volunteer',
-                purpose: 'Gender Equality',
-                location: "15' miles",
-                details: 'Volunteer • Gender Equality • 15 miles',
-            },
-            {
-                title: 'Neighborhood advocacy walk',
-                activity: 'Protest',
-                purpose: 'Racial Equality',
-                location: "10' miles",
-                details: 'Protest • Racial Equality • 10 miles',
-            },
+            { title: 'Downtown cleanup drive', activity: 'Volunteer', purpose: 'Environmental', location: "5' miles", details: 'Volunteer • Environmental • 5 miles' },
+            { title: 'Community voting rally', activity: 'Protest', purpose: 'Voting', location: "10' miles", details: 'Protest • Voting • 10 miles' },
+            { title: 'Regional justice summit', activity: 'Volunteer', purpose: 'Gender Equality', location: "15' miles", details: 'Volunteer • Gender Equality • 15 miles' },
+            { title: 'Neighborhood advocacy walk', activity: 'Protest', purpose: 'Racial Equality', location: "10' miles", details: 'Protest • Racial Equality • 10 miles' },
         ];
 
+        function setPageNav(page) {
+            setPage(page);
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
         function setPage(page) {
-            currentPage = page;
-            render();
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(page).classList.add('active');
         }
 
         function showPrevious() {
-            currentImage = currentImage === 0 ? images.length - 1 : currentImage - 1;
-            render();
+            currentImage = currentImage === 0 ? heroImages.length - 1 : currentImage - 1;
+            updateCarousel();
         }
 
         function showNext() {
-            currentImage = currentImage === images.length - 1 ? 0 : currentImage + 1;
-            render();
+            currentImage = currentImage === heroImages.length - 1 ? 0 : currentImage + 1;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            document.getElementById('hero-image').src = heroImages[currentImage];
+            document.getElementById('carousel-counter').textContent = (currentImage + 1) + ' / ' + heroImages.length;
+            for (let i = 0; i < heroImages.length; i++) {
+                document.getElementById('ind-' + i).classList.toggle('active', i === currentImage);
+            }
         }
 
         function handleLocationChange(value) {
             location = value;
+            document.getElementById('country-select-container').style.display = value === 'Select country' ? 'block' : 'none';
             if (value !== 'Select country') {
                 selectedCountry = '';
                 mapView = 'global';
             }
-            render();
+            updateEvents();
         }
 
         function handleCountrySelect(country) {
             selectedCountry = country;
             mapView = country === 'United States' ? 'us' : 'global';
-            render();
+            updateMapImage();
         }
 
-        function getFilteredEvents() {
-            return events.filter((event) => {
-                const matchesActivity = activity ? event.activity === activity : true;
-                const matchesPurpose = purpose ? event.purpose === purpose : true;
-                const matchesLocation = location ? event.location === location : true;
-                return matchesActivity && matchesPurpose && matchesLocation;
+        function updateMapImage() {
+            document.getElementById('map-image').src = mapView === 'us' ? './images/US-map.png' : './images/global-map.png';
+        }
+
+        function updateEvents() {
+            const filtered = events.filter(event => {
+                return (!activity || event.activity === activity) &&
+                       (!purpose || event.purpose === purpose) &&
+                       (!location || event.location === location);
             });
-        }
 
-        function renderTopNav() {
-            return `
-                <header class="sticky top-0 z-50 border-b border-white/10 bg-black/95 px-6 py-4 backdrop-blur-sm">
-                    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4">
-                        <button onclick="setPage('home')" class="rounded-3xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-white transition hover:border-white/20 hover:bg-white/10">
-                            Defending Democracy
-                        </button>
-
-                        <nav class="hidden grow items-center justify-center gap-4 text-sm font-medium text-gray-300 md:flex">
-                            <button onclick="setPage('home')" class="${currentPage === 'home' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white'} rounded-full px-4 py-2 transition">Home</button>
-                            <button onclick="setPage('about')" class="${currentPage === 'about' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white'} rounded-full px-4 py-2 transition">About DD</button>
-                            <button onclick="setPage('projects')" class="${currentPage === 'projects' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white'} rounded-full px-4 py-2 transition">Projects</button>
-                            <button onclick="setPage('issues')" class="${currentPage === 'issues' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white'} rounded-full px-4 py-2 transition">Issues</button>
-                            <button onclick="setPage('testimonies')" class="${currentPage === 'testimonies' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white'} rounded-full px-4 py-2 transition">Testimonies</button>
-                            <button onclick="setPage('students')" class="${currentPage === 'students' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white'} rounded-full px-4 py-2 transition">For Students</button>
-                            <button onclick="setPage('educate')" class="${currentPage === 'educate' ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-white'} rounded-full px-4 py-2 transition">Educate</button>
-                        </nav>
-
-                        <div class="flex items-center gap-4">
-                            <img src="./R.png" alt="Logo" class="h-12 w-12 object-contain">
-                            <select onchange="setPage(this.value)" class="block md:hidden rounded-2xl border border-white/10 bg-black px-3 py-2 text-sm text-white outline-none">
-                                <option value="home">Home</option>
-                                <option value="about">About DD</option>
-                                <option value="projects">Projects</option>
-                                <option value="issues">Issues</option>
-                                <option value="testimonies">Testimonies</option>
-                                <option value="students">For Students</option>
-                                <option value="educate">Educate</option>
-                            </select>
-                        </div>
+            const container = document.getElementById('events-container');
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="no-events">No events match those selections yet. Try changing the dropdowns to update the list.</div>';
+            } else {
+                container.innerHTML = filtered.map((event, index) => `
+                    <div class="event-card">
+                        <p class="event-card-label">${index === 0 ? 'Nearby event' : index === 1 ? 'Upcoming action' : 'Featured location'}</p>
+                        <p class="event-card-title">${event.title}</p>
+                        <p class="event-card-details">${event.details}</p>
                     </div>
-                </header>
-            `;
-        }
-
-        function renderHomePage() {
-            const filteredEvents = getFilteredEvents();
-            return `
-                <div class="min-h-screen w-full bg-black text-white font-sans">
-                    <div class="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-between px-6 pb-12">
-                        <div class="mt-10 w-full rounded-[2rem] border border-white/10 bg-zinc-950/80 p-6 shadow-2xl md:p-10">
-                            <div class="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-                                <div class="space-y-6">
-                                    <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight">The world needs you.</h1>
-                                    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                                        <p class="text-lg md:text-xl text-gray-200 max-w-xl font-medium leading-relaxed">
-                                            Youth across the globe are finding their voices. At Defending Democracy, we amplify those voices for the whole world to hear.
-                                        </p>
-                                        <button onclick="setPage('about')" class="inline-block bg-[#D10024] hover:bg-red-700 text-white font-bold px-10 py-3 text-center transition-colors duration-200 whitespace-nowrap">
-                                            About DD
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="relative h-[320px] overflow-hidden rounded-[1.5rem] border border-white/10">
-                                    <img src="${images[currentImage]}" alt="Hero background" class="h-full w-full object-cover">
-                                    <div class="absolute inset-0 bg-black/20"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="w-full">
-                            <div class="mb-4 flex items-center justify-between">
-                                <button onclick="showPrevious()" class="rounded-full border border-white/40 bg-white/10 p-3 text-xl transition hover:bg-white/20" aria-label="Previous image">
-                                    &#8249;
-                                </button>
-                                <div class="grid grid-cols-5 gap-2 h-[3px] bg-white/20 flex-1 mx-4">
-                                    ${images.map((_, index) => `<div class="h-full ${index === currentImage ? 'bg-white' : 'bg-white/30'}"></div>`).join('')}
-                                </div>
-                                <button onclick="showNext()" class="rounded-full border border-white/40 bg-white/10 p-3 text-xl transition hover:bg-white/20" aria-label="Next image">
-                                    &#8250;
-                                </button>
-                            </div>
-                            <div class="flex items-center justify-between text-xs font-semibold tracking-widest text-gray-300">
-                                <span>${currentImage + 1} / ${images.length}</span>
-                                <span>Swipe through the story</span>
-                            </div>
-                        </div>
-
-                        <section class="mt-10 rounded-[2rem] border border-white/10 bg-zinc-950/80 p-6 shadow-2xl md:p-8">
-                            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                                <p class="text-xl font-semibold text-white">I am interested in</p>
-                                <div class="flex flex-col gap-3 md:flex-row md:flex-wrap">
-                                    <label class="flex flex-col text-sm font-medium text-gray-300">
-                                        <span class="mb-1">Activity</span>
-                                        <select onchange="activity = this.value; render()" class="rounded-lg border border-white/10 bg-black px-3 py-2 text-white outline-none">
-                                            <option value="">Choose activity</option>
-                                            <option>Protest</option>
-                                            <option>Volunteer</option>
-                                            <option>Cleanup</option>
-                                        </select>
-                                    </label>
-                                    <label class="flex flex-col text-sm font-medium text-gray-300">
-                                        <span class="mb-1">Purpose</span>
-                                        <select onchange="purpose = this.value; render()" class="rounded-lg border border-white/10 bg-black px-3 py-2 text-white outline-none">
-                                            <option value="">Choose purpose</option>
-                                            <option>Environmental</option>
-                                            <option>Voting</option>
-                                            <option>Womans Rights</option>
-                                            <option>Gender Equality</option>
-                                            <option>Racial Equality</option>
-                                        </select>
-                                    </label>
-                                    <label class="flex flex-col text-sm font-medium text-gray-300">
-                                        <span class="mb-1">Location</span>
-                                        <select onchange="handleLocationChange(this.value)" class="rounded-lg border border-white/10 bg-black px-3 py-2 text-white outline-none">
-                                            <option value="">Choose location</option>
-                                            <option>5' miles</option>
-                                            <option>10' miles</option>
-                                            <option>15' miles</option>
-                                            <option>Select city</option>
-                                            <option>Select state</option>
-                                            <option value="Select country">Select country</option>
-                                        </select>
-                                        ${location === 'Select country' ? `
-                                            <select onchange="handleCountrySelect(this.value)" class="mt-3 rounded-lg border border-white/10 bg-black px-3 py-2 text-white outline-none">
-                                                <option value="">Choose a country</option>
-                                                ${unCountries.map(c => `<option>${c}</option>`).join('')}
-                                            </select>
-                                        ` : ''}
-                                    </label>
-                                </div>
-                            </div>
-                        </section>
-
-                        <section class="mt-8 rounded-[2rem] border border-white/10 bg-zinc-950/80 p-6 shadow-2xl md:p-8">
-                            <div class="mb-4 flex items-center justify-between">
-                                <div>
-                                    <h2 class="text-2xl font-semibold text-white">Find nearby opportunities</h2>
-                                    <p class="text-sm text-gray-400">Hover over highlighted areas to explore local events.</p>
-                                </div>
-                                <div class="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-sm text-red-300">Live map preview</div>
-                            </div>
-
-                            <div class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-                                <div class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-transparent p-4">
-                                    <div class="relative h-[320px] overflow-hidden rounded-[1.2rem] bg-transparent">
-                                        <img src="${mapView === 'us' ? './images/US-map.png' : './images/global-map.png'}" alt="Map" class="h-full w-full object-contain transition-all duration-700 ease-in-out">
-                                    </div>
-                                </div>
-
-                                <div class="flex flex-col gap-3">
-                                    ${filteredEvents.length === 0 ? `
-                                        <div class="rounded-[1.25rem] border border-white/10 bg-black/50 p-4 text-sm text-gray-300">
-                                            No events match those selections yet. Try changing the dropdowns to update the list.
-                                        </div>
-                                    ` : filteredEvents.map((event, index) => `
-                                        <div class="rounded-[1.25rem] border border-white/10 bg-black/50 p-4">
-                                            <p class="text-sm text-gray-400">${index === 0 ? 'Nearby event' : index === 1 ? 'Upcoming action' : 'Featured location'}</p>
-                                            <p class="mt-1 text-lg font-semibold text-white">${event.title}</p>
-                                            <p class="mt-2 text-sm text-gray-300">${event.details}</p>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderAboutPage() {
-            return `
-                <div class="space-y-8">
-                    <section class="rounded-[2rem] border border-white/10 bg-zinc-950/80 p-8 shadow-2xl">
-                        <div class="max-w-4xl space-y-6">
-                            <p class="text-sm uppercase tracking-[0.32em] text-red-400">About Defending Democracy</p>
-                            <h1 class="text-4xl font-black uppercase tracking-tight text-white">A movement for youth-led civic action</h1>
-                            <p class="text-lg leading-relaxed text-gray-300">
-                                Defending Democracy connects young people with projects that protect rights, strengthen communities, and build a healthier future. Using this platform, we make civic engagement easy to explore, understand, and join.
-                            </p>
-                            <div class="grid gap-6 md:grid-cols-2">
-                                <div class="rounded-[1.5rem] border border-white/10 bg-black/50 p-6">
-                                    <h2 class="text-xl font-semibold text-white">Who we are</h2>
-                                    <p class="mt-3 text-sm leading-6 text-gray-300">
-                                        A network of young volunteers, organizers, and educators who believe every voice matters. We support local and international efforts that fight for equity and strengthen democracy.
-                                    </p>
-                                </div>
-                                <div class="rounded-[1.5rem] border border-white/10 bg-black/50 p-6">
-                                    <h2 class="text-xl font-semibold text-white">What we do</h2>
-                                    <p class="mt-3 text-sm leading-6 text-gray-300">
-                                        We bring together causes, stories, and learning resources so students and young people can discover opportunities by issue, by region, and by impact.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="grid gap-6 md:grid-cols-3">
-                        <div class="rounded-[1.5rem] border border-white/10 bg-black/50 p-6">
-                            <h3 class="text-xl font-semibold text-white">Our mission</h3>
-                            <p class="mt-3 text-sm leading-6 text-gray-300">Build an easy way for youth to find civic projects, support democratic values, and take action on issues that matter.</p>
-                        </div>
-                        <div class="rounded-[1.5rem] border border-white/10 bg-black/50 p-6">
-                            <h3 class="text-xl font-semibold text-white">Why it matters</h3>
-                            <p class="mt-3 text-sm leading-6 text-gray-300">Democracy works when more people participate. We help young leaders turn awareness into action and connection into real change.</p>
-                        </div>
-                        <div class="rounded-[1.5rem] border border-white/10 bg-black/50 p-6">
-                            <h3 class="text-xl font-semibold text-white">How to join</h3>
-                            <p class="mt-3 text-sm leading-6 text-gray-300">Explore activities, choose an issue, and connect to projects or resources that match your interests and experience level.</p>
-                        </div>
-                    </section>
-                </div>
-            `;
-        }
-
-        function renderProjectsPage() {
-            const projects = [
-                { name: 'Youth Voter Mobilization', category: 'Voting', location: 'United States', summary: 'A campaign to register students and bring voter education to campuses.' },
-                { name: 'Community Clean-Up', category: 'Environmental', location: 'Local', summary: 'Volunteer crews restore parks, collect waste, and advocate for cleaner public spaces.' },
-                { name: 'Equality Dialogue Series', category: 'Gender Equality', location: 'Global', summary: 'Virtual roundtables connecting youth leaders across borders to discuss equity and justice.' },
-                { name: 'Rights Awareness Workshop', category: 'Civil Rights', location: 'Regional', summary: 'Practical sessions on voting rights, protest safety, and digital civic participation.' },
-            ];
-            return `
-                <div class="space-y-8">
-                    <section class="rounded-[2rem] border border-white/10 bg-zinc-950/80 p-8 shadow-2xl">
-                        <p class="text-sm uppercase tracking-[0.32em] text-red-400">Projects</p>
-                        <h1 class="mt-3 text-4xl font-black uppercase tracking-tight text-white">Explore community-led action</h1>
-                        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-gray-300">
-                            Browse featured projects. Each program is designed to be accessible, impactful, and connected to the issues young people care about most.
-                        </p>
-                    </section>
-                    <section class="grid gap-6 md:grid-cols-2">
-                        ${projects.map(p => `
-                            <div class="rounded-[1.75rem] border border-white/10 bg-black/50 p-6">
-                                <div class="flex items-center justify-between gap-4">
-                                    <div>
-                                        <p class="text-sm uppercase tracking-[0.3em] text-red-400">${p.category}</p>
-                                        <h2 class="mt-3 text-2xl font-semibold text-white">${p.name}</h2>
-                                    </div>
-                                    <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.22em] text-gray-300">${p.location}</span>
-                                </div>
-                                <p class="mt-4 text-sm leading-6 text-gray-300">${p.summary}</p>
-                            </div>
-                        `).join('')}
-                    </section>
-                </div>
-            `;
-        }
-
-        function renderIssuesPage() {
-            const issues = [
-                { title: 'Environmentalism', detail: 'Protect land, clean streets, and promote sustainable civic projects.' },
-                { title: 'Voting', detail: 'Mobilize young people, host voter education drives, and strengthen turnout.' },
-                { title: 'Gender Equality', detail: 'Support inclusive leadership and equal opportunity for all genders.' },
-                { title: 'Racial Equality', detail: 'Build solidarity, confront bias, and invest in equitable policy change.' },
-                { title: 'Civil Rights', detail: 'Defend free expression, protest rights, and access to fair representation.' },
-                { title: 'Education', detail: 'Create resources that teach civic engagement and democratic values.' },
-            ];
-            return `
-                <div class="space-y-8">
-                    <section class="rounded-[2rem] border border-white/10 bg-zinc-950/80 p-8 shadow-2xl">
-                        <p class="text-sm uppercase tracking-[0.32em] text-red-400">Issues</p>
-                        <h1 class="mt-3 text-4xl font-black uppercase tracking-tight text-white">The topics we focus on</h1>
-                        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-gray-300">
-                            These issue areas guide the work we feature. Each one is a space where youth can take concrete action and lead local change.
-                        </p>
-                    </section>
-                    <div class="grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">
-                        <div class="grid gap-6 sm:grid-cols-2">
-                            ${issues.map(issue => `
-                                <div class="rounded-[1.75rem] border border-white/10 bg-black/50 p-6">
-                                    <h2 class="text-xl font-semibold text-white">${issue.title}</h2>
-                                    <p class="mt-3 text-sm leading-6 text-gray-300">${issue.detail}</p>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div class="rounded-[1.75rem] border border-white/10 bg-black/50 p-6">
-                            <h2 class="text-xl font-semibold text-white">Issue categories</h2>
-                            <ul class="mt-4 space-y-3 text-gray-300">
-                                <li>Environmentalism</li>
-                                <li>Gender Equality</li>
-                                <li>Racial Equality</li>
-                                <li>Voting Rights</li>
-                                <li>Civil Engagement</li>
-                                <li>Education</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderTestimoniesPage() {
-            const testimonials = [
-                { name: 'Maya', role: 'Youth Organizer', quote: 'Joining the local clean-up helped me meet other activists and take real steps toward civic change.' },
-                { name: 'Tariq', role: 'Student Leader', quote: 'I learned how to turn my passion for voting rights into an action plan in my community.' },
-                { name: 'Ana', role: 'Volunteer', quote: 'Defending Democracy made it easier to find meaningful events and resources that matched my values.' },
-            ];
-            return `
-                <div class="space-y-8">
-                    <section class="rounded-[2rem] border border-white/10 bg-zinc-950/80 p-8 shadow-2xl">
-                        <p class="text-sm uppercase tracking-[0.32em] text-red-400">Testimonies</p>
-                        <h1 class="mt-3 text-4xl font-black uppercase tracking-tight text-white">Voices from the movement</h1>
-                        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-gray-300">
-                            Real students and organizers share what working for democracy feels like, and how youth-led action is changing communities.
-                        </p>
-                    </section>
-                    <div class="grid gap-6 lg:grid-cols-3">
-                        ${testimonials.map(item => `
-                            <div class="rounded-[1.75rem] border border-white/10 bg-black/50 p-6">
-                                <p class="text-lg font-semibold text-white">"${item.quote}"</p>
-                                <p class="mt-4 text-sm uppercase tracking-[0.24em] text-red-400">${item.role}</p>
-                                <p class="text-sm font-semibold text-gray-300">${item.name}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderStudentsPage() {
-            const cards = [
-                { title: 'DD Database', description: 'A searchable guide to student-centered programs and civic resources.' },
-                { title: 'Teaching Resources', description: 'Lesson plans, toolkits, and tips for educators and campus organizers.' },
-                { title: 'Student Stories', description: 'Profiles of youth leaders who used civic action to create change.' },
-            ];
-            return `
-                <div class="space-y-8">
-                    <section class="rounded-[2rem] border border-white/10 bg-zinc-950/80 p-8 shadow-2xl">
-                        <p class="text-sm uppercase tracking-[0.32em] text-red-400">For students</p>
-                        <h1 class="mt-3 text-4xl font-black uppercase tracking-tight text-white">Opportunities for every level</h1>
-                        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-gray-300">
-                            Whether you are in high school, college, or a community group, discover programs that fit your schedule, interests, and goals.
-                        </p>
-                    </section>
-                    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                        ${cards.map(card => `
-                            <div class="rounded-[1.75rem] border border-white/10 bg-black/50 p-6">
-                                <h2 class="text-2xl font-semibold text-white">${card.title}</h2>
-                                <p class="mt-3 text-sm leading-6 text-gray-300">${card.description}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderEducatePage() {
-            const resources = [
-                { title: 'Civic Learning', subtitle: 'DD Database', description: 'Search guides, reports, and classroom-ready content for youth civic engagement.' },
-                { title: 'Teaching materials', subtitle: 'Embedded lessons', description: 'Resources for educators who want to bring democracy, protest, and rights into the classroom.' },
-                { title: 'Topic exploration', subtitle: 'Research & tools', description: 'Dive deeper into each issue with curated readings, videos, and downloadable guides.' },
-            ];
-            return `
-                <div class="space-y-8">
-                    <section class="rounded-[2rem] border border-white/10 bg-zinc-950/80 p-8 shadow-2xl">
-                        <p class="text-sm uppercase tracking-[0.32em] text-red-400">Educate</p>
-                        <h1 class="mt-3 text-4xl font-black uppercase tracking-tight text-white">Learn more, take action</h1>
-                        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-gray-300">
-                            A place for teaching resources, toolkits, and deeper context on the issues that shape youth civic engagement around the world.
-                        </p>
-                    </section>
-                    <div class="grid gap-6 lg:grid-cols-3">
-                        ${resources.map(resource => `
-                            <div class="rounded-[1.75rem] border border-white/10 bg-black/50 p-6">
-                                <p class="text-sm uppercase tracking-[0.24em] text-red-400">${resource.subtitle}</p>
-                                <h2 class="mt-3 text-2xl font-semibold text-white">${resource.title}</h2>
-                                <p class="mt-3 text-sm leading-6 text-gray-300">${resource.description}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        function render() {
-            let content = '';
-            
-            if (currentPage === 'home') {
-                content = renderHomePage();
-            } else if (currentPage === 'about') {
-                content = renderAboutPage();
-            } else if (currentPage === 'projects') {
-                content = renderProjectsPage();
-            } else if (currentPage === 'issues') {
-                content = renderIssuesPage();
-            } else if (currentPage === 'testimonies') {
-                content = renderTestimoniesPage();
-            } else if (currentPage === 'students') {
-                content = renderStudentsPage();
-            } else if (currentPage === 'educate') {
-                content = renderEducatePage();
+                `).join('');
             }
-
-            document.getElementById('app').innerHTML = renderTopNav() + `<main class="mx-auto max-w-7xl px-6 py-8">${content}</main>`;
         }
-
-        // Initial render
-        render();
     </script>
 </body>
 </html>
