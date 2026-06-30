@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Defending Democracy</title>
-    <link rel="icon" type="image/png" href="./public/favicon.png">
+    <link rel="icon" type="image/png" href="./favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -35,11 +35,11 @@
         let mapView = 'global';
 
         const images = [
-            './public/images/hero-1.png',
-            './public/images/hero-2.png',
-            './public/images/hero-3.png',
-            './public/images/hero-4.png',
-            './public/images/hero-5.png',
+            './images/hero-1.png',
+            './images/hero-2.png',
+            './images/hero-3.png',
+            './images/hero-4.png',
+            './images/hero-5.png',
         ];
 
         const unCountries = [
@@ -135,7 +135,7 @@
                         </nav>
 
                         <div class="flex items-center gap-4">
-                            <img src="./src/assets/R.png" alt="Logo" class="h-12 w-12 object-contain">
+                            <img src="./R.png" alt="Logo" class="h-12 w-12 object-contain">
                             <select onchange="setPage(this.value)" class="block md:hidden rounded-2xl border border-white/10 bg-black px-3 py-2 text-sm text-white outline-none">
                                 <option value="home">Home</option>
                                 <option value="about">About DD</option>
@@ -252,7 +252,7 @@
                             <div class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
                                 <div class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-transparent p-4">
                                     <div class="relative h-[320px] overflow-hidden rounded-[1.2rem] bg-transparent">
-                                        <img src="${mapView === 'us' ? './src/assets/US-map.png' : './src/assets/global-map.png'}" alt="Map" class="h-full w-full object-contain transition-all duration-700 ease-in-out">
+                                        <img src="${mapView === 'us' ? './images/US-map.png' : './images/global-map.png'}" alt="Map" class="h-full w-full object-contain transition-all duration-700 ease-in-out">
                                     </div>
                                 </div>
 
